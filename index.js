@@ -115,6 +115,34 @@ const teamEmployee = () => {
                     return false;
                 };
             },
+        },
+
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is the employees ID?',
+            validate: employeeIdInput => {
+                if (employeeIdInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the employees ID!')
+                    return false;
+                };
+            },
+        },
+
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the employees Email?",
+            validate: employeeEmailInput => {
+                if (employeeEmailInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the employees Email!')
+                    return false;
+                };
+            },
         }
     ])
 }
