@@ -13,9 +13,12 @@ const Engineer = require('./lib/Engineer');
 // Empty team array
 const teamMembers = []
 
+
+// Creates an array of questions for user input
 const teamManager = () => {
     return inquirer.prompt([
 
+        // Manager name question
         {
             type: 'input',
             name: 'name',
@@ -30,6 +33,7 @@ const teamManager = () => {
             },
         },
 
+        // Manager ID question
         {
             type: 'input',
             name: 'id',
@@ -44,6 +48,7 @@ const teamManager = () => {
             },
         },
 
+        // Manager Email question
         {
             type: 'input',
             name: 'email',
@@ -58,6 +63,7 @@ const teamManager = () => {
             },
         },
 
+        // Manager office number question
         {
             type: 'input',
             name: 'officeNumber',
@@ -71,8 +77,47 @@ const teamManager = () => {
                 };
             },
         }
-    ]);
+    ])
+    .then(managerInput => {
+        const {name, id, email, officeNumber} = managerInput;
+        const manager = new Manager (name, id, email, officeNumber);
+
+        teamMembers.push(manager);
+    });
+};
+
+
+const teamEmployee = () => {
+    console.log(`
+    =============
+    Add Employees
+    =============
+    `);
+
+    return inquirer.prompt ([
+
+        {
+            type: 'checkbox',
+            name: 'role',
+            message: 'Please choose the role of your employee:',
+            choices: ['Intern', 'Engineer']
+        },
+
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the employees name?',
+            validate: employeeNameInput => {
+                if (employeeNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the employees name!')
+                    return false;
+                };
+            },
+        }
+    ])
 }
 
-teamManager();
-
+teamManager()
+.then(teamEmployee);
