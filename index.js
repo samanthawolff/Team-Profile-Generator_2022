@@ -78,6 +78,7 @@ const teamManager = () => {
             },
         }
     ])
+    // Collect data for manager input
     .then(managerInput => {
         const {name, id, email, officeNumber} = managerInput;
         const manager = new Manager (name, id, email, officeNumber);
@@ -96,6 +97,7 @@ const teamEmployee = () => {
 
     return inquirer.prompt ([
 
+        // Confirm engineer question
         {
             type: 'confirm',
             name: 'confirmEngineer',
@@ -103,6 +105,7 @@ const teamEmployee = () => {
             default: false
         },
 
+        // Confirm intern question
         {
             type: 'confirm',
             name: 'confirmIntern',
@@ -110,6 +113,7 @@ const teamEmployee = () => {
             default: false
         },
 
+        // Employee name question
         {
             type: 'input',
             name: 'name',
@@ -124,6 +128,7 @@ const teamEmployee = () => {
             },
         },
 
+        // Employee ID question
         {
             type: 'input',
             name: 'id',
@@ -138,6 +143,7 @@ const teamEmployee = () => {
             },
         },
 
+        // Employee Email question
         {
             type: 'input',
             name: 'email',
@@ -152,6 +158,7 @@ const teamEmployee = () => {
             },
         },
 
+        // Engineer GitHub question
         {
             type: 'input',
             name: 'github',
@@ -165,6 +172,7 @@ const teamEmployee = () => {
             },
         },
 
+        // Intern school question
         {
             type: 'input',
             name: 'school',
@@ -178,6 +186,7 @@ const teamEmployee = () => {
             },
         },
 
+        // Confirm another employee question
         {
             type: 'confirm',
             name: 'confirmAddEmployee',
@@ -185,13 +194,14 @@ const teamEmployee = () => {
             default: false
         }
     ])
+    // Collect data for employee input
     .then(employeeInput => {
         let {name, id, email, role, github, school, confirmAddEmployee} = employeeInput;
         let employee;
 
         if (role === "Engineer") {
             employee = new Engineer (name, id, email, github);
-        } else if (role === "intern") {
+        } else if (role === "Intern") {
             employee = new Intern (name, id, email, school);
         };
 
