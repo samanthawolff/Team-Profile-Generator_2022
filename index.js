@@ -1,5 +1,6 @@
 // Require page that generated HTML
 const generateHTML = require('./src/generateHTML.js');
+const { writeFile, copyFile} = require('./src/generate-site.js');
 
 // Require modules
 const fs = require('fs');
@@ -21,7 +22,7 @@ const teamManager = () => {
         // Manager name question
         {
             type: 'input',
-            name: 'name',
+            name: 'managerName',
             message: 'What is the team managers name?',
             validate: managerNameInput => {
                 if (managerNameInput) {
@@ -36,7 +37,7 @@ const teamManager = () => {
         // Manager ID question
         {
             type: 'input',
-            name: 'id',
+            name: 'managerId',
             message: 'What is the managers ID?',
             validate: idInput => {
                 if (idInput) {
@@ -51,7 +52,7 @@ const teamManager = () => {
         // Manager Email question
         {
             type: 'input',
-            name: 'email',
+            name: 'managerEmail',
             message: 'What is the managers Email?',
             validate: managerEmailInput => {
                 if (managerEmailInput) {
@@ -79,13 +80,13 @@ const teamManager = () => {
         }
     ])
     // Collect data for manager input
-    .then(managerInput => {
+   /*.then(managerInput => {
         const {name, id, email, officeNumber} = managerInput;
         const manager = new Manager (name, id, email, officeNumber);
 
         teamMembers.push(manager);
-    });
-};
+    }); */
+}; 
 
 
 const teamEmployee = () => {
@@ -195,7 +196,7 @@ const teamEmployee = () => {
         }
     ])
     // Collect data for employee input
-    .then(employeeInput => {
+    /*.then(employeeInput => {
         let {name, id, email, role, github, school, confirmAddEmployee} = employeeInput;
         let employee;
 
@@ -212,11 +213,12 @@ const teamEmployee = () => {
         } else {
             return teamMembers;
         };
-    });
+    }); */
 };
 
 
-const createFile = data => {
+// Function to generate index.html file
+/* const createFile = data => {
     fs.writeFile('./dist/index.html', data, err => {
         if (err) {
             console.log(err);
@@ -225,11 +227,28 @@ const createFile = data => {
             console.log('Your team profile has been created!')
         };
     });
-};
+}; */
+
 
 teamManager()
 .then(teamEmployee)
-.then (answers => {
+.then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+
+
+/* .then (answers => {
     return generateHTML(answers);
 })
 .then(data => {
@@ -237,4 +256,4 @@ teamManager()
 })
 .catch(err => {
     console.log(err);
-});
+}); */
