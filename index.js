@@ -97,10 +97,17 @@ const teamEmployee = () => {
     return inquirer.prompt ([
 
         {
-            type: 'checkbox',
-            name: 'role',
-            message: 'Please choose the role of your employee:',
-            choices: ['Intern', 'Engineer']
+            type: 'confirm',
+            name: 'confirmEngineer',
+            message: 'Is your employee an Engineer?',
+            default: false
+        },
+
+        {
+            type: 'confirm',
+            name: 'confirmIntern',
+            message: 'Is your employee an Intern?',
+            default: false
         },
 
         {
@@ -149,11 +156,10 @@ const teamEmployee = () => {
             type: 'input',
             name: 'github',
             message: 'What is the engineers GitHub username?',
-            validate: employeeGithubInput => {
-                if (employeeGithubInput) {
+            when: ({confirmEngineer}) => {
+                if (confirmEngineer) {
                     return true;
                 } else {
-                    console.log('Please enter the employees GitHub username!')
                     return false;
                 };
             },
@@ -163,11 +169,10 @@ const teamEmployee = () => {
             type: 'input',
             name: 'school',
             message: 'What is the name of the interns school?',
-            validate: internSchoolInput => {
-                if (internSchoolInput) {
+            when: ({confirmIntern}) => {
+                if (confirmIntern) {
                     return true;
                 } else {
-                    console.log('Please enter the interns school name!')
                     return false;
                 };
             },
