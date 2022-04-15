@@ -1,5 +1,5 @@
 // Require page that generated HTML
-const generateHTML = require('./src/generateHTML');
+const generateHTML = require('./src/generateHTML.js');
 
 // Require modules
 const fs = require('fs');
@@ -210,10 +210,31 @@ const teamEmployee = () => {
         if (confirmAddEmployee) {
             return teamEmployee(teamMembers);
         } else {
-            return teamMembers
+            return teamMembers;
+        };
+    });
+};
+
+
+const createFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log('Your team profile has been created!')
         };
     });
 };
 
 teamManager()
-.then(teamEmployee);
+.then(teamEmployee)
+.then (answers => {
+    return generateHTML(answers);
+})
+.then(data => {
+    return createFile(data);
+})
+.catch(err => {
+    console.log(err);
+});
