@@ -143,9 +143,62 @@ const teamEmployee = () => {
                     return false;
                 };
             },
+        },
+
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is the engineers GitHub username?',
+            validate: employeeGithubInput => {
+                if (employeeGithubInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the employees GitHub username!')
+                    return false;
+                };
+            },
+        },
+
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What is the name of the interns school?',
+            validate: internSchoolInput => {
+                if (internSchoolInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the interns school name!')
+                    return false;
+                };
+            },
+        },
+
+        {
+            type: 'confirm',
+            name: 'confirmAddEmployee',
+            message: 'Would you like to add another employee?',
+            default: false
         }
     ])
-}
+    .then(employeeInput => {
+        let {name, id, email, role, github, school, confirmAddEmployee} = employeeInput;
+        let employee;
+
+        if (role === "Engineer") {
+            employee = new Engineer (name, id, email, github);
+        } else if (role === "intern") {
+            employee = new Intern (name, id, email, school);
+        };
+
+        teamMembers.push(employee);
+
+        if (confirmAddEmployee) {
+            return teamEmployee(teamMembers);
+        } else {
+            return teamMembers
+        };
+    });
+};
 
 teamManager()
 .then(teamEmployee);
