@@ -1,23 +1,7 @@
-/* const generateTeamMembers = team => {
+module.exports = templateData => {
 
-    const generateManager = function (manager) {
-        return `
-        <div class="card employee-card">
-            <div class="card-header>
-                <h2 class="card-title"> ${manager.name} </h2>
-                <h3 class="card-title"> ${manager.role} </h3>
-            </div>
-        </div>
-        <div class="card-body"> 
-            <p> ${manager.email} </p>
-        </div>
+    const { manager, engineer, intern } = templateData;
 
-        `
-    }
-} */
-
-
-function generateHTML(data) {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -38,17 +22,15 @@ function generateHTML(data) {
 
         <div class="card employee-card">
             <div class="card-header>
-                <h2 class="card-title"> ${data.managerName} </h2>
+                <h2 class="card-title"> ${manager.managerName} </h2>
                 <h3 class="card-title">Manager</h3>
             </div>
         </div>
         <div class="card-body"> 
-            <p> ${data.managerEmail} </p>
+            <p> ${manager.managerEmail} </p>
         </div>
       </body>
 
     </html>
     `
 };
-
-module.exports = generateHTML;

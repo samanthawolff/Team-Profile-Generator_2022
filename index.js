@@ -79,13 +79,6 @@ const teamManager = () => {
             },
         }
     ])
-    // Collect data for manager input
-   /*.then(managerInput => {
-        const {name, id, email, officeNumber} = managerInput;
-        const manager = new Manager (name, id, email, officeNumber);
-
-        teamMembers.push(manager);
-    }); */
 }; 
 
 
@@ -195,39 +188,7 @@ const teamEmployee = () => {
             default: false
         }
     ])
-    // Collect data for employee input
-    /*.then(employeeInput => {
-        let {name, id, email, role, github, school, confirmAddEmployee} = employeeInput;
-        let employee;
-
-        if (role === "Engineer") {
-            employee = new Engineer (name, id, email, github);
-        } else if (role === "Intern") {
-            employee = new Intern (name, id, email, school);
-        };
-
-        teamMembers.push(employee);
-
-        if (confirmAddEmployee) {
-            return teamEmployee(teamMembers);
-        } else {
-            return teamMembers;
-        };
-    }); */
 };
-
-
-// Function to generate index.html file
-/* const createFile = data => {
-    fs.writeFile('./dist/index.html', data, err => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            console.log('Your team profile has been created!')
-        };
-    });
-}; */
 
 
 teamManager()
@@ -245,15 +206,3 @@ teamManager()
   .catch(err => {
     console.log(err);
   });
-
-
-
-/* .then (answers => {
-    return generateHTML(answers);
-})
-.then(data => {
-    return createFile(data);
-})
-.catch(err => {
-    console.log(err);
-}); */
